@@ -430,6 +430,14 @@ fn main() {
                     ),
             )
             .plugin(
+                "galaxy",
+                InlinedPlugin::new()
+                    .commands(&["galaxy_download_to_temp"])
+                    .default_permission(
+                        DefaultPermissionRule::AllowAllCommands,
+                    ),
+            )
+            .plugin(
                 "friends",
                 InlinedPlugin::new()
                     .commands(&[

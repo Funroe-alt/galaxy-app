@@ -35,6 +35,12 @@
 					"url": "https://api.mclo.gs/*"
 				},
 				{
+					"url": "https://api.curseforge.com/*"
+				},
+				{
+					"url": "https://api.modpacks.ch/*"
+				},
+				{
 					"url": "https://fill.papermc.io/*"
 				},
 				{
@@ -104,6 +110,7 @@
 		"utils:default",
 		"ads:default",
 		"friends:default",
+		"galaxy:default",
 		"worlds:default"
 	]
 }

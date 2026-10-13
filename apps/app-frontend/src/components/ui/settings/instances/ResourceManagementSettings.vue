@@ -280,7 +280,7 @@ async function findLauncherDir() {
 				id="max-downloads"
 				v-model="settings.max_concurrent_downloads"
 				:min="1"
-				:max="10"
+				:max="64"
 				:step="1"
 			/>
 			<p class="m-0 leading-tight text-secondary">

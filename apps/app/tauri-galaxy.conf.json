@@ -1,0 +1,22 @@
+{
+	"bundle": {
+		"createUpdaterArtifacts": true
+	},
+	"build": {
+		"features": ["updater"]
+	},
+	"app": {
+		"security": {
+			"capabilities": ["ads", "core", "plugins", "updater"]
+		}
+	},
+	"plugins": {
+		"updater": {
+			"pubkey": "RUN_setup-updater.ps1_FIRST",
+			"endpoints": ["https://github.com/Funroe-alt/galaxy-app/releases/latest/download/latest.json"],
+			"windows": {
+				"installMode": "passive"
+			}
+		}
+	}
+}

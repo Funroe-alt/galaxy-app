@@ -1,8 +1,10 @@
 import 'overlayscrollbars/overlayscrollbars.css'
 
+import '@/assets/galaxy.scss'
 import { installTooltipDirective } from '@modrinth/ui'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import { createApp } from 'vue'
+import '@/composables/use-galaxy-style.ts'
 
 import App from '@/App.vue'
 import { overlayScrollbarsDirective } from '@/directives/overlayScrollbars'

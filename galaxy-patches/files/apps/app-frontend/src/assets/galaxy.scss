@@ -1,0 +1,140 @@
+// Galaxy look-and-feel styles. Driven by classes and variables that
+// composables/use-galaxy-style.ts puts on <html>.
+
+// ---------- Logo ----------
+.galaxy-wordmark {
+	color: var(--color-contrast);
+}
+
+// ---------- Custom font ----------
+:root.galaxy-custom-font body,
+:root.galaxy-custom-font body * {
+	font-family: var(--galaxy-font) !important;
+}
+
+// ---------- Background image ----------
+#galaxy-background {
+	display: none;
+}
+
+:root.galaxy-has-bg {
+	background: #000;
+
+	body {
+		background: transparent !important;
+	}
+
+	#galaxy-background {
+		display: block;
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		// scale a little so the blurred edges don't show
+		transform: scale(1.06);
+		filter: blur(var(--galaxy-bg-blur, 8px));
+	}
+
+	// darken the picture so text stays readable
+	#galaxy-background::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, var(--galaxy-bg-dim, 0.4));
+	}
+
+	// let the picture show through the main panels
+	.app-grid-layout {
+		background-color: transparent !important;
+	}
+
+	.app-grid-navbar,
+	.app-grid-statusbar {
+		background-color: color-mix(
+			in srgb,
+			var(--color-raised-bg) var(--galaxy-panel-opacity, 75%),
+			transparent
+		) !important;
+	}
+
+	.app-contents {
+		background-color: color-mix(
+			in srgb,
+			var(--color-bg) var(--galaxy-panel-opacity, 75%),
+			transparent
+		) !important;
+	}
+}
+
+// frosted glass panels (costs a little performance)
+// The blur goes on a pseudo-element, NOT on the panel itself: backdrop-filter on
+// .app-contents would turn it into the containing block for every position:fixed
+// child, which shifts the content border, loading bar and popups out of place.
+:root.galaxy-has-bg.galaxy-glass {
+	.app-grid-navbar::after,
+	.app-grid-statusbar::after,
+	.app-contents::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		border-radius: inherit;
+		pointer-events: none;
+		backdrop-filter: blur(14px);
+	}
+}
+
+// ---------- Pride ----------
+:root.pride-month {
+	--pride-gradient: linear-gradient(to right, #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787);
+	--loading-bar-gradient: var(--pride-gradient);
+}
+
+// thin rainbow stripe along the top
+:root.pride-month body::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: var(--pride-gradient);
+	z-index: 9999;
+	pointer-events: none;
+}
+
+// rainbow logo
+:root.pride-month .galaxy-wordmark {
+	background: var(--pride-gradient);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+// soft rainbow glow over the whole launcher
+:root.pride-month body::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 9998;
+	background:
+		radial-gradient(circle at 15% 20%, #e40303, transparent 45%),
+		radial-gradient(circle at 85% 15%, #ff8c00, transparent 45%),
+		radial-gradient(circle at 50% 50%, #ffed00, transparent 50%),
+		radial-gradient(circle at 20% 85%, #008026, transparent 45%),
+		radial-gradient(circle at 80% 80%, #004dff, transparent 45%),
+		radial-gradient(circle at 50% 0%, #750787, transparent 50%);
+	filter: blur(60px);
+	mix-blend-mode: screen;
+	opacity: 0.12;
+}
+
+// Keep the content-area border lined up with the content area itself
+:root.galaxy-has-bg .app-contents::before {
+	position: absolute !important;
+	inset: 0 !important;
+}

@@ -14,6 +14,7 @@ import {
 	ChevronLeftIcon,
 	ChevronRightIcon,
 	CompassIcon,
+	PackageSearchIcon,
 	ImageIcon,
 	LogInIcon,
 	LogOutIcon,
@@ -95,6 +96,7 @@ import NavButton from '@/components/ui/NavButton.vue'
 import OnboardingChecklist from '@/components/ui/onboarding-checklist/index.vue'
 import PrideFundraiserBanner from '@/components/ui/PrideFundraiserBanner.vue'
 import PromotionWrapper from '@/components/ui/PromotionWrapper.vue'
+import GalaxyServerStatus from '@/components/ui/GalaxyServerStatus.vue'
 import QuickInstanceSwitcher from '@/components/ui/QuickInstanceSwitcher.vue'
 import SharedInstanceInviteHandler from '@/components/ui/shared-instances/shared-instance-invite-handler/index.vue'
 import SplashScreen from '@/components/ui/SplashScreen.vue'
@@ -366,10 +368,8 @@ const hasPlus = computed(
 		(hasMidasBadge(credentials.value.user) ||
 			hasActivePride26Midas(authenticatedModrinthUser.value?.campaigns?.pride_26)),
 )
-const showAd = computed(
-	() => sidebarVisible.value && !hasPlus.value && credentials.value !== undefined,
-)
-const adConsentAvailable = computed(() => credentials.value !== undefined && !hasPlus.value)
+const showAd = computed(() => false)
+const adConsentAvailable = computed(() => false)
 providePageContext({
 	hierarchicalSidebarAvailable: ref(true),
 	showAds: showAd,
@@ -1556,7 +1556,7 @@ const modrinthAccountMenuOptions = computed(() => [
 		href: 'https://modrinth.plus?app',
 		target: '_blank',
 		tone: 'purple',
-		shown: !hasPlus.value,
+		shown: false,
 	},
 	{
 		id: 'add-friend',
@@ -2282,6 +2282,12 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 			>
 				<CompassIcon />
 			</NavButton>
+			<NavButton v-tooltip.right="'CurseForge & FTB'" to="/galaxy-browse">
+				<PackageSearchIcon />
+			</NavButton>
+			<NavButton v-tooltip.right="'Servers'" to="/galaxy-servers">
+				<ServerStackIcon />
+			</NavButton>
 			<NavButton
 				v-if="appSettings.showSkinSelectorInSidebar"
 				v-tooltip.right="formatMessage(appMessages.skinSelectorLabel)"
@@ -2297,6 +2303,7 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 				<ImageIcon />
 			</NavButton>
 			<NavButton
+				v-if="false"
 				v-tooltip.right="formatMessage(messages.modrinthHosting)"
 				to="/hosting/manage"
 				:is-primary="(r) => r.path === '/hosting/manage' || r.path === '/hosting/manage/'"
@@ -2392,7 +2399,7 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 		</div>
 		<div data-tauri-drag-region class="app-grid-statusbar bg-bg-raised h-[--top-bar-height] flex">
 			<div data-tauri-drag-region class="flex min-w-0 flex-1 items-center overflow-hidden p-2">
-				<TextLogo class="h-7 w-auto shrink-0 text-contrast pointer-events-none" />
+				<span class="galaxy-wordmark h-7 flex items-center shrink-0 pointer-events-none select-none text-xl font-extrabold">✦ Galaxy</span>
 				<div data-tauri-drag-region class="ml-2 flex shrink-0 items-center gap-2">
 					<IconButton
 						type="outlined"
@@ -2546,7 +2553,8 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 						v-if="prideFundraiserEnabled"
 						class="p-4 border-0 border-b-[1px] border-[--brand-gradient-border] border-solid"
 					/>
-					<div v-if="news && news.length > 0" class="p-4 flex flex-col items-center">
+					<GalaxyServerStatus class="p-4 border-0 border-b-[1px] border-[--brand-gradient-border] border-solid" />
+					<div v-if="false" class="p-4 flex flex-col items-center">
 						<h3 class="text-base mb-4 text-primary font-medium m-0 text-left w-full">
 							{{ formatMessage(messages.news) }}
 						</h3>

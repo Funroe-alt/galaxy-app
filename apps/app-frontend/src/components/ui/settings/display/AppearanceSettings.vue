@@ -13,6 +13,8 @@ import { useAppSettings } from '@/composables/use-app-settings.ts'
 import { type ColorTheme, isDarkTheme, useTheme } from '@/composables/use-theme.ts'
 import { type AppSettings, get, set } from '@/helpers/settings.ts'
 import { appSettingsModalContextKey } from '@/providers/app-settings-modal'
+import GalaxyStyleSettings from './GalaxyStyleSettings.vue'
+
 
 const theme = useTheme()
 const appSettings = useAppSettings()
@@ -156,7 +158,7 @@ provideAppearanceSettings({
 	updatePreferences,
 })
 </script>
-
-<template>
-	<AppearanceSettingsLayout />
-</template>
+  <template>
+       	<AppearanceSettingsLayout />
+       	<GalaxyStyleSettings />
+       </template>

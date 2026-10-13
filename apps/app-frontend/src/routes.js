@@ -53,6 +53,16 @@ export default new createRouter({
 			component: () => import('@/pages/Browse.vue'),
 		},
 		{
+			path: '/galaxy-browse',
+			name: 'Galaxy browse',
+			component: () => import('@/pages/GalaxyBrowse.vue'),
+		},
+		{
+			path: '/galaxy-servers',
+			name: 'Galaxy servers',
+			component: () => import('@/pages/GalaxyServers.vue'),
+		},
+		{
 			path: '/skins',
 			name: 'Skin selector',
 			component: () => import('@/pages/Skins.vue'),
